@@ -28,6 +28,14 @@ public class TestMatriz {
     }
     
     @Test
+    public void testUpdateErrorValor() {
+    	service = new BusinessService();
+    	
+    	Matriz matriz = new Matriz(4);
+        assertEquals("ERROR UPDATE - el valor debe estar entre -109 y 109", service.execute("UPDATE 2 2 2 150", matriz.getMatriz3D()));
+    }
+    
+    @Test
     public void testQuery() {
     	service = new BusinessService();
     	
@@ -42,6 +50,14 @@ public class TestMatriz {
     	
     	Matriz matriz = new Matriz(4);
         assertEquals("ERROR - QUERY - Coordenada inexistente", service.execute("QUERY 2 2 2 5 5 5", matriz.getMatriz3D()));
+    }
+    
+    @Test
+    public void testError() {
+    	service = new BusinessService();
+    	
+    	Matriz matriz = new Matriz(4);
+        assertEquals("ERROR", service.execute("UPTE 2 2 2 4", matriz.getMatriz3D()));
     }
 
 }

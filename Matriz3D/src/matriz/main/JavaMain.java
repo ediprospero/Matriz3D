@@ -4,19 +4,24 @@ import java.util.Scanner;
 import matriz.business.service.IBusinessService;
 import matriz.business.service.impl.BusinessService;
 import matriz.constructor.Matriz;
+import matriz.util.Util;
 
 public class JavaMain {
 	
 	public static IBusinessService service;
+	
+	public static Util util;
 		
 	public static void main(String[] args) {	
 		
 		Scanner sc = new Scanner(System.in);
+		
+		util = new Util();
 
 		System.out.print("Ingrese tamaño de la matriz");
 		int size = sc.nextInt();
 		
-		if((1 <= size && size <= 100)) {
+		if(util.validarSize(size)) {
 			
 			Matriz matriz = new Matriz(size);
 			
@@ -32,8 +37,6 @@ public class JavaMain {
 			System.out.println(service.execute("QUERY 1 1 1 2 2 2", matriz.getMatriz3D()));
 			System.out.println(service.execute("QUERY 2 2 2 2 2 2", matriz.getMatriz3D()));
 			
-		}else {
-			System.out.println("ERROR - el tamaño debe estar entre 1 y 100");
 		}
 	}
 

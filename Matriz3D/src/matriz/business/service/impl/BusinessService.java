@@ -1,7 +1,10 @@
 package matriz.business.service.impl;
 import matriz.business.service.IBusinessService;
+import matriz.util.Util;
 
 public class BusinessService implements IBusinessService{
+	
+	public static Util util = new Util();
 	
 	@Override
 	public String execute(String query, int matriz3D [][][]) {
@@ -15,11 +18,13 @@ public class BusinessService implements IBusinessService{
 				int coordenadaZ = Integer.parseInt(argSep[3])-1;
 				int valor = Integer.parseInt(argSep[4]);
 				
-				if(!(-109 <= valor && valor <= 109))return "ERROR UPDATE - el valor debe estar entre -109 y 109";
+				if(util.validarValorUpdate(valor)){
+					matriz3D[coordenadaX][coordenadaY][coordenadaZ] = valor;
+					return "SUCCESS";
+				}else{
+					return "ERROR UPDATE - el valor debe estar entre -109 y 109";
+				}
 
-				matriz3D[coordenadaX][coordenadaY][coordenadaZ] = valor;
-				
-				return "SUCCESS";
 			}catch (Exception e) {
 				return "ERROR - UPDATE - Coordenada inexistente";
 			}
